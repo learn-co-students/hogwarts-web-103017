@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 class HogCardContainer extends React.Component {
   constructor() {
     super();
@@ -18,7 +19,7 @@ handleClick = () => {
 
   render() {
     return (
-      <div>
+      <div className="ui eight wide column">
         {this.state.showView ? <ShowHogCard handleClick={this.handleClick} hog={this.props.hog}/> : <HogCard handleClick={this.handleClick} hog={this.props.hog} />}
       </div>
     )
@@ -26,17 +27,22 @@ handleClick = () => {
 }
 
 const HogCard = (props) => {
+  // const imagePath = `../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`;
+  // console.log(typeof imagePath)
+  // console.log(`../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`)
   return (
     <div onClick={props.handleClick}>
+      <img src={require(`../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`)}/>
       <h3>{props.hog.name}</h3>
     </div>
   )
 }
 
 const ShowHogCard = (props) => {
-  console.log(props.hog)
+  // const imagePath = `../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`;
   return (
-    <div onClick={props.handleClick}>
+    <div onClick={props.handleClick} >
+      <img src={require(`../hog-imgs/${props.hog.name.toLowerCase().split(' ').join('_')}.jpg`)}/>
       <h3>{props.hog.name}</h3>
       <h4>{props.hog.specialty}</h4>
       <h4>{props.hog.greased ? "Greased" : "Ungreased"}</h4>
