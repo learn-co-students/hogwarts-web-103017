@@ -3,9 +3,9 @@ import MoreHog from './MoreHog'
 import LessHog from './LessHog'
 
 const HogDisplay = (props) => {
-  return (<div className='ui eight wide column'>
+  return (<div className='ui grid container'>
             {props.hogs.map(hog => {
-              return props.isClicked.includes(hog.name) ? <MoreHog hog={hog} onSecondClick={props.onSecondClick} /> : <LessHog hog={hog} onClick={props.onClick} />
+              return props.isClicked.includes(hog.name) ? <MoreHog hog={hog} /> : <LessHog hog={hog} />
             })}
           </div>)
 }

@@ -14,7 +14,8 @@ export default class HogsList extends React.Component {
 
   componentDidMount(){
     this.setState({
-      hogs: hogs
+      hogs: hogs,
+      isClicked: []
     })
   }
 
@@ -34,12 +35,19 @@ export default class HogsList extends React.Component {
       return {
         isClicked: this.state.isClicked.splice(index)
       }
-    },() => console.log(this.state))
+    })
+  }
+
+  clickHandler = (event) => {
+    console.log(event.target)
+    console.log(event.target.parentNode)
+    event.persist()
+    event.target.className === "maxPigTile" ? this.onSecondClick(event) : this.onClick(event)
   }
 
   render(){
-    return <div className= 'ui grid container'>
-              <HogDisplay hogs={this.state.hogs} onClick={this.onClick} onSecondClick={this.onSecondClick} isClicked={this.state.isClicked}/>
+    return <div onClick={this.clickHandler}>
+              <HogDisplay hogs={this.state.hogs} isClicked={this.state.isClicked}/>
             </div>
   }
 }
