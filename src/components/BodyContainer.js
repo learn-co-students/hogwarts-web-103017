@@ -11,8 +11,39 @@ class BodyContainer extends Component {
     };
   }
 
+  handleCheckbox = e => {
+    if (e.target.checked) {
+      const greasedPigs = this.state.displayHogs.filter(pig => {return pig.greased === true})
+      this.setState({displayHogs: greasedPigs})
+    } else {
+      this.setState({displayHogs: hogs})
+    }
+  }
+
+  handleDropDown = e => {
+    console.log(e.target.value)
+    if (e.target.value === "name") {
+      const sortedNames = this.state.displayHogs.sort((a, b) => {
+        if (a.name < b.name) {
+          return -1
+        } else {
+          return 1
+        }
+      });
+      this.setState({displayHogs: sortedNames})
+    } else {
+      const sortedNames = this.state.displayHogs.sort((a, b) => {
+        if (a.weight < b.weight) {
+          return -1
+        } else {
+          return 1
+        }
+      });
+    }
+  }
+
   render() {
-    const imgSrc = "../hog-imgs/";
+    const imgSrc = "/../hog-imgs/";
 
     const formatImgName = name => {
       return (
@@ -27,8 +58,8 @@ class BodyContainer extends Component {
 
     return (
       <div>
-        Greased: <input type="checkbox" value="greased" />
-        <select>
+        Greased: <input onClick={this.handleCheckbox} type="checkbox" value="greased" />
+        <select onChange={this.handleDropDown}>
           <option value="name">Name</option>
           <option value="weight">Weight</option>
         </select>
