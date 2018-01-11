@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
+const Tile = props => {
+  const imgSrc = props.img;
 
+  const weight =
+    "weight as a ratio of hog to LG - 24.7 Cu. Ft. French Door Refrigerator with Thru-the-Door Ice and Water";
 
-const Tile = (props) =>
-  <div class="ui card">
-    <div class="image">
-      <img src="/images/avatar2/large/kristy.png">
+  return (
+    <div className="ui card" key={props.hog.key}>
+      <div className="image">
+        <img src={require(`../hog-imgs/mudblood.jpg`)} />
+      </div>
+
+      <div className="name">
+        <h1 className="header">{props.hog.name}</h1>
+
+        <div className="description">{props.hog.specialty}</div>
+
+        <div className="description">
+          {props.hog.greased ? "greased" : "ungreased"}
+        </div>
+
+        <div className="description">{props.hog[weight]}</div>
+      </div>
     </div>
-    <div class="name">
-      <a class="header">Kristy</a>
-      <div class="meta">
-        <span class="date">Joined in 2013</span>
-      </div>
-      <div class="specialty">
-        Kristy is an art director living in New York.
-      </div>
-      <div class="greased">
-        Kristy is an art director living in New York.
-      </div>
-      <div class="refrigerator">
-        Kristy is an art director living in New York.
-      </div>
-    </div>
-  </div>
+  );
+};
 
-
-export default Title;
+export default Tile;
