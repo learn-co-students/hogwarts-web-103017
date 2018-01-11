@@ -40,36 +40,47 @@ handleGreasedFilter = () => {
   }, () => this.greasedHogs())
 }
 
+sortHogsByWeight = () => {
+  const sortedByWeight = [...this.state.hogs];
+  sortedByWeight.sort(function(a,b){
+    const firstValue = a['weight as a ratio of hog to LG - 24.7 Cu. Ft. French Door Refrigerator with Thru-the-Door Ice and Water'];
+    const secondValue = b['weight as a ratio of hog to LG - 24.7 Cu. Ft. French Door Refrigerator with Thru-the-Door Ice and Water'];
+
+    return secondValue - firstValue;
+  })
+  return sortedByWeight
+}
+
+
+sortHogsByName = () => {
+  const sortedByName = [...this.state.hogs];
+  sortedByName.sort(function(a,b){
+    const firstValue = a.name.split(" ").join('').toUpperCase();
+    const secondValue = b.name.split(" ").join('').toUpperCase();
+    if (firstValue < secondValue) {
+       return -1;
+     }
+     if (firstValue > secondValue) {
+       return 1;
+     }
+    return 0;
+  })
+  return sortedByName
+}
+
 sortHogs = () => {
-  console.log(this.state.hogs)
+  let sortedHogs = this.state.hogs
   switch (this.state.filter) {
     case "Name":
-      const sortedByName = [...this.state.hogs];
-      sortedByName.sort(function(a,b){
-        const firstValue = a.name.split(" ").join('').toUpperCase();
-        const secondValue = b.name.split(" ").join('').toUpperCase();
-
-        // console.log(firstValue,secondValue)
-        if (firstValue < secondValue) {
-           return -1;
-         }
-         if (firstValue > secondValue) {
-           return 1;
-         }
-        return 0;
-      })
-      console.log(sortedByName)
-
-      // this.setState({
-      //   filteredHogs: sortedByName
-      // })
+      sortedHogs = this.sortHogsByName();
       break;
     case "Weight":
-
+      sortedHogs = this.sortHogsByWeight();
       break;
-    default:
-
-  }
+    }
+  this.setState({
+    filteredHogs: sortedHogs
+  }, () => console.log(this.state))
 }
 
 handleFilter = (e) => {
@@ -79,7 +90,7 @@ handleFilter = (e) => {
 }
 
   render() {
-    console.log(this.state.hogs)
+    // console.log(this.state.hogs)
     const {hogs, greased} = this.state;
     return (
       <div className="App">
